@@ -25,7 +25,6 @@ public class PasswordGen {
                     System.out.println("Here is your new password \n" + "\nplease write this down and put it in a safe place\n" );
                     generatePass();
                     System.out.println();
-                    
                     break;
                 case "2":// prints settings
                     viewSettings();
@@ -80,15 +79,25 @@ public class PasswordGen {
             genPassString += specialchars;
         }
 
+        int[] l = new int[passLength];
+
         for (int i = 0; i < passLength; i++) {
-            System.out.print(genPassString.charAt(rand.nextInt(genPassString.length()-1)));
+            int v = rand.nextInt(genPassString.length() - 1);
+            for (int numb : l) {
+                if (numb == v) {
+                   v = rand.nextInt(genPassString.length() - 1);
+                }
+            }
+            l[i] = v;
+            System.out.print(genPassString.charAt(v));
+            
         }
         
         
 
     }
 
-    public static void viewSettings(){ //replace this with a way to toggle without having going to the settings
+    public static void viewSettings(){ //replace this with a way to toggle without having go to the settings
         System.out.println("=============[SETTINGS]=============");
         System.out.println("Length: " + passLength);
         if (lower) {
